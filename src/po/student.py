@@ -1,4 +1,4 @@
-class Book:
+class Student:
     sno: str
     sname: str
     ssex: str
