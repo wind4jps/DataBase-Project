@@ -20,7 +20,34 @@ class BookDao:
     def delStudent(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('delete from student values where sno = %s', (s.sno))
+            self.su.execute('delete from student where sno = %s', (s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def selStudentBySno(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('select * from student where sno = %s', (s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def selStudentBySname(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('select * from student where sname = %s', (s.sname))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updStudent(self, s: Student):   # TODO：单独更新某一行的某一属性
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update student set sname = %s where sno = %s', (s.sname, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
