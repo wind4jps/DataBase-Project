@@ -6,9 +6,15 @@ class DbUtil:
     connect: object
     cursor: object
 
-    def __init__(self, student, username, password):
+    # def __init__(self, student, username, password):
+    #     self.connect = pymysql.Connect(host='localhost', port = 3306, database='studentxj',
+    #                                    user=username, passwd=password, charset='utf8')
+    #     self.cursor = self.connect.cursor()
+
+    # 测试
+    def __init__(self):
         self.connect = pymysql.Connect(host='localhost', port = 3306, database='studentxj',
-                                       user=username, passwd=password, charset='utf8')
+                                       user='root', passwd='assassin030527', charset='utf8')
         self.cursor = self.connect.cursor()
 
     def close(self):
@@ -19,6 +25,6 @@ class DbUtil:
         self.cursor.execute(sql, val)
         self.connect.commit()
 
-    def excuteList(self, sql: str):
+    def executeList(self, sql: str):
         self.cursor.execute(sql, None)
         return self.cursor.fetchall()

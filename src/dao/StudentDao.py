@@ -1,7 +1,7 @@
 from util.DbUtil import DbUtil
 from po.student import Student
 
-class BookDao:
+class StudentDao:
     su: DbUtil
 
     def __init__(self):
@@ -52,3 +52,13 @@ class BookDao:
         except Exception as e:
             print(e)
             return "操作失败"
+
+    def list_book(self, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from student limit %d,%d'
+                                        % (start, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
