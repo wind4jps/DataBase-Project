@@ -72,6 +72,8 @@ from po.student import Student
 # table.place(width=800, height=300)
 # window.mainloop()
 
+class TableOperation:
+
 class Choose:
     num = ''
     name = ''
@@ -84,6 +86,51 @@ class Choose:
         top2 = Tk(className='增加选项')
         # TODO:利用弹窗实现数据插入
 
+
+def chooseOp():
+    choose_table_window.destroy()
+    global choose_op_window
+    choose_op_window = Tk()
+    choose_op_window.title('操作选项')
+    width = 72
+    height = 1
+    Button(choose_op_window, text='增加', width=width, height=height,
+           command=textCommand, bg='light yellow', font='楷体').grid(row=0, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='删除', width=width, height=height,
+           command=textCommand, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='查找', width=width, height=height,
+           command=textCommand, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='修改', width=width, height=height,
+           command=textCommand, bg='light yellow', font='楷体').grid(row=30, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='返回', width=width, height=height,
+           command=chooseTable, bg='light cyan', font='楷体').grid(row=40, column=1, padx=10, pady=20)
+    choose_op_window.geometry('750x400')
+
+def textCommand():
+    print("ok")
+
+
+def chooseTable():
+    global flag
+    if flag == 1:
+        logInWindow.destroy()
+    flag += 1
+    if 'choose_op_window' in globals():
+        choose_op_window.destroy()
+    global choose_table_window
+    choose_table_window = Tk()
+    choose_table_window.title("表选项")
+    width = 72
+    height = 1
+    Button(choose_table_window, text='学生信息表', width=width, height=height,
+           command=chooseOp, bg='light yellow', font='楷体').grid(row=0, column=1, padx=10, pady=20)
+    Button(choose_table_window, text='学生选课成绩表', width=width, height=height,
+           command=chooseOp, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
+    Button(choose_table_window, text='课程信息表', width=width, height=height,
+           command=chooseOp, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
+
+
+flag = 1
 logInWindow = Tk()
 logInWindow.title('登录')
 logInWindow.geometry('400x300')
@@ -94,20 +141,14 @@ var_user_name = StringVar()
 entry_usr_name = Entry(logInWindow, textvariable=var_user_name, font=('Arial', 14))
 entry_usr_name.place(x=120, y=155)
 
-varUsrPwd = StringVar()
-entry_usr_pwd = Entry(logInWindow, textvariable=varUsrPwd, font=('Arial', 14), show='*')
+var_usr_pwd = StringVar()
+entry_usr_pwd = Entry(logInWindow, textvariable=var_usr_pwd, font=('Arial', 14), show='*')
 entry_usr_pwd.place(x=120, y=195)
 
 title = Label(logInWindow, text='学生学籍管理系统', bg='white', font=('Arial', 30), width=30, height=2)
 title.pack()
 
-def usrLogin():
-    user = var_user_name.get()
-    passwd = varUsrPwd.get()
-    print(user)
-    print(passwd)
-
-btn_login = Button(logInWindow, text='Login', command=usrLogin)
+btn_login = Button(logInWindow, text='Login', command=chooseTable)
 btn_login.place(x=185, y=250)
 
 logInWindow.mainloop()
