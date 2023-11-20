@@ -13,7 +13,7 @@ class DbUtil:
 
     # 测试
     def __init__(self):
-        self.connect = pymysql.Connect(host='localhost', port = 3306, database='studentxj',
+        self.connect = pymysql.Connect(host='localhost', port=3306, database='studentxj',
                                        user='root', passwd='assassin030527', charset='utf8')
         self.cursor = self.connect.cursor()
 
