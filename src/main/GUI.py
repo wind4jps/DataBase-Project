@@ -73,19 +73,69 @@ from po.student import Student
 # window.mainloop()
 
 class TableOperation:
+    def insertWindow(self):
+        insert_window = Tk(className='增加选项')
+        Label(insert_window, text='学号', font=('宋体', 14)).place(x=10, y=50)
+        Label(insert_window, text='姓名', font=('宋体', 14)).place(x=10, y=100)
+        Label(insert_window, text='性别', font=('宋体', 14)).place(x=10, y=150)
+        Label(insert_window, text='班级', font=('宋体', 14)).place(x=10, y=200)
+        Label(insert_window, text='专业', font=('宋体', 14)).place(x=10, y=250)
+        Label(insert_window, text='院系', font=('宋体', 14)).place(x=10, y=300)
+        Label(insert_window, text='出生日期', font=('宋体', 14)).place(x=10, y=350)
+        Label(insert_window, text='联系电话', font=('宋体', 14)).place(x=10, y=400)
 
-class Choose:
-    num = ''
-    name = ''
-    major = ''
-    size = '800x500'
-    width = 20
-    height = 1
+        var_sno = StringVar()
+        entry_sno = Entry(insert_window, textvariable=var_sno, font=('宋体', 14))
+        entry_sno.place(x=100, y=50)
 
-    def intoInsert(self):
-        top2 = Tk(className='增加选项')
-        # TODO:利用弹窗实现数据插入
+        var_sname = StringVar()
+        entry_sname = Entry(insert_window, textvariable=var_sname, font=('宋体', 14))
+        entry_sname.place(x=100, y=100)
 
+        var_ssex = StringVar()
+        entry_ssex = Entry(insert_window, textvariable=var_ssex, font=('宋体', 14))
+        entry_ssex.place(x=100, y=150)
+
+        var_sclass = StringVar()
+        entry_sclass = Entry(insert_window, textvariable=var_sclass, font=('宋体', 14))
+        entry_sclass.place(x=100, y=200)
+
+        var_smajor = StringVar()
+        entry_smajor = Entry(insert_window, textvariable=var_smajor, font=('宋体', 14))
+        entry_smajor.place(x=100, y=250)
+
+        var_sdept = StringVar()
+        entry_sdept = Entry(insert_window, textvariable=var_sdept, font=('宋体', 14))
+        entry_sdept.place(x=100, y=300)
+
+        var_sbir = StringVar()
+        entry_sbir = Entry(insert_window, textvariable=var_sbir, font=('宋体', 14))
+        entry_sbir.place(x=100, y=350)
+
+        var_stele = StringVar()
+        entry_stele = Entry(insert_window, textvariable=var_stele, font=('宋体', 14))
+        entry_stele.place(x=100, y=400)
+
+
+        def textPrint():
+            print(var_sno.get())
+            print(var_sname.get())
+            print(var_ssex.get())
+            print(var_sclass.get())
+            print(var_smajor.get())
+            print(var_sdept.get())
+            print(var_sbir.get())
+            print(var_stele.get())
+
+        btn_insert = Button(insert_window, text='确定', command=textPrint)
+        btn_quit = Button(insert_window, text='退出', command=textPrint)
+        btn_insert.place(x=150, y=450)
+        btn_quit.place(x=250, y=450)
+
+        insert_window.geometry('400x500')
+
+
+table_op = TableOperation()
 
 def chooseOp():
     choose_table_window.destroy()
@@ -95,7 +145,7 @@ def chooseOp():
     width = 72
     height = 1
     Button(choose_op_window, text='增加', width=width, height=height,
-           command=textCommand, bg='light yellow', font='楷体').grid(row=0, column=1, padx=10, pady=20)
+           command=table_op.insertWindow, bg='light yellow', font='楷体').grid(row=0, column=1, padx=10, pady=20)
     Button(choose_op_window, text='删除', width=width, height=height,
            command=textCommand, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
     Button(choose_op_window, text='查找', width=width, height=height,
@@ -128,6 +178,7 @@ def chooseTable():
            command=chooseOp, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
     Button(choose_table_window, text='课程信息表', width=width, height=height,
            command=chooseOp, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
+
 
 
 flag = 1
