@@ -5,7 +5,7 @@ from tkinter.simpledialog import *
 import tkinter.messagebox
 from po.student import Student
 
-# sd = StudentDao()
+sd = StudentDao()
 # window = Tk()
 # window.geometry('800x500')
 #
@@ -117,18 +117,30 @@ class TableOperation:
         entry_stele = Entry(insert_window, textvariable=var_stele, font=('宋体', 14))
         entry_stele.place(x=100, y=400)
 
+        def addStudent():
+            sno = entry_sno.get()
+            sname = entry_sname.get()
+            ssex = entry_ssex.get()
+            sclass = entry_sclass.get()
+            smajor = entry_smajor.get()
+            sdept = entry_sdept.get()
+            sbir = entry_sbir.get()
+            stele = entry_stele.get()
+            if sno is not None and sname is not None:
+                r = sd.addStudent(Student(sno=sno, sname=sname, ssex=ssex, sclass=sclass, smajor=smajor,
+                                          sdept=sdept, sbir=sbir, stele=stele))
+                tkinter.messagebox.showinfo(r, "成功增加数据")
+                # 清空输入文本框
+                entry_sno.delete(0, END)
+                entry_sname.delete(0, END)
+                entry_ssex.delete(0, END)
+                entry_sclass.delete(0, END)
+                entry_smajor.delete(0, END)
+                entry_sdept.delete(0, END)
+                entry_sbir.delete(0, END)
+                entry_stele.delete(0, END)
 
-        def textPrint():
-            print(entry_sno.get())
-            print(entry_sname.get())
-            print(entry_sclass.get())
-            print(entry_smajor.get())
-            print(entry_sdept.get())
-            print(entry_sbir.get())
-            print(entry_stele.get())
-
-
-        btn_insert = Button(insert_window, text='确定', command=textPrint)
+        btn_insert = Button(insert_window, text='确定', command=addStudent)
         btn_quit = Button(insert_window, text='退出', command=insert_window.destroy)
         btn_insert.place(x=150, y=450)
         btn_quit.place(x=250, y=450)
