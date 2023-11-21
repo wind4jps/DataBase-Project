@@ -17,10 +17,46 @@ class StudentDao:
             print(e)
             return "操作失败"
 
-    def delStudent(self, s: Student):
+    def delStudentBySno(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
             self.su.execute('delete from student where sno = %s', (s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def delStudentBySclass(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from student where sclass = %s', (s.sclass))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def deleStudentBySmajor(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from student where smajor = %s', (s.smajor))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def deleStudentBySdept(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from student where sdept = %s', (s.sdept))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def deleStudentAll(self):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from student')
             return "操作成功"
         except Exception as e:
             print(e)

@@ -145,6 +145,75 @@ class TableOperation:
         btn_insert.place(x=150, y=450)
         btn_quit.place(x=250, y=450)
 
+    def deleteWindow(self):
+        delete_window = Tk(className='删除选项')
+        delete_window.geometry('600x400')
+        Label(delete_window, text='输入要删除学生的学号', font=('宋体', 14)).place(x=10, y=50)
+        Label(delete_window, text='删除该班级的全部学生', font=('宋体', 14)).place(x=10, y=125)
+        Label(delete_window, text='删除该专业的全部学生', font=('宋体', 14)).place(x=10, y=200)
+        Label(delete_window, text='删除该院系的全部学生', font=('宋体', 14)).place(x=10, y=275)
+
+        def textPrint():
+            print(entry_sno.get())
+
+        def deleteStudent():
+            sno = entry_sno.get()
+            sclass = entry_sclass.get()
+            smajor = entry_smajor.get()
+            sdept = entry_sdept.get()
+            if sno != '':
+                r = sd.delStudentBySno(Student(sno=sno))
+                tkinter.messagebox.showinfo(r, '成功删除')
+                entry_sno.delete(0, END)
+            elif sclass != '':
+                r = sd.delStudentBySclass(Student(sclass=sclass))
+                tkinter.messagebox.showinfo(r, '成功删除')
+                entry_sclass.delete(0, END)
+            elif smajor != '':
+                r = sd.deleStudentBySmajor(Student(smajor=smajor))
+                tkinter.messagebox.showinfo(r, '成功删除')
+                entry_smajor.delete(0, END)
+            elif sdept != '':
+                r = sd.deleStudentBySdept(Student(sdept=sdept))
+                tkinter.messagebox.showinfo(r, '成功删除')
+                entry_sdept.delete(0, END)
+
+        def deletAllStudent():
+            msg = tkinter.messagebox.askokcancel('确认', '确定要删除所有数据吗?')
+            if msg:
+                r = sd.deleStudentAll()
+                tkinter.messagebox.showinfo(r, '删除成功')
+
+
+        var_sno = StringVar()
+        entry_sno = Entry(delete_window, textvariable=var_sno, font=('宋体', 14))
+        entry_sno.place(x=220, y=50)
+        btn_delete_sno = Button(delete_window, text='删除', command=deleteStudent)
+        btn_delete_sno.place(x=450, y=45)
+
+        var_sclass = StringVar()
+        entry_sclass = Entry(delete_window, textvariable=var_sclass, font=('宋体', 14))
+        entry_sclass.place(x=220, y=125)
+        btn_delete_sclass = Button(delete_window, text='删除', command=deleteStudent)
+        btn_delete_sclass.place(x=450, y=120)
+
+        var_smajor = StringVar()
+        entry_smajor = Entry(delete_window, textvariable=var_smajor, font=('宋体', 14))
+        entry_smajor.place(x=220, y=200)
+        btn_delete_smajor = Button(delete_window, text='删除', command=deleteStudent)
+        btn_delete_smajor.place(x=450, y=195)
+
+        var_sdept = StringVar()
+        entry_sdept = Entry(delete_window, textvariable=var_sdept, font=('宋体', 14))
+        entry_sdept.place(x=220, y=275)
+        btn_delete_sdept = Button(delete_window, text='删除', command=deleteStudent)
+        btn_delete_sdept.place(x=450, y=270)
+
+        btn_delete_all = Button(delete_window, text='删除全部数据', command=deletAllStudent)
+        btn_quit = Button(delete_window, text='退出', width=10, height=2, command=delete_window.destroy)
+        btn_delete_all.place(x=10, y=330)
+        btn_quit.place(x=270, y=330)
+
 
 table_op = TableOperation()
 
@@ -158,7 +227,7 @@ def chooseOp():
     Button(choose_op_window, text='增加', width=width, height=height,
            command=table_op.insertWindow, bg='light yellow', font='楷体').grid(row=0, column=1, padx=10, pady=20)
     Button(choose_op_window, text='删除', width=width, height=height,
-           command=textCommand, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
+           command=table_op.deleteWindow, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
     Button(choose_op_window, text='查找', width=width, height=height,
            command=textCommand, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
     Button(choose_op_window, text='修改', width=width, height=height,
