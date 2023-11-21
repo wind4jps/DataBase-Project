@@ -75,6 +75,7 @@ from po.student import Student
 class TableOperation:
     def insertWindow(self):
         insert_window = Tk(className='增加选项')
+        insert_window.geometry('400x500')
         Label(insert_window, text='学号', font=('宋体', 14)).place(x=10, y=50)
         Label(insert_window, text='姓名', font=('宋体', 14)).place(x=10, y=100)
         Label(insert_window, text='性别', font=('宋体', 14)).place(x=10, y=150)
@@ -118,21 +119,19 @@ class TableOperation:
 
 
         def textPrint():
-            print(var_sno.get())
-            print(var_sname.get())
-            print(var_ssex.get())
-            print(var_sclass.get())
-            print(var_smajor.get())
-            print(var_sdept.get())
-            print(var_sbir.get())
-            print(var_stele.get())
+            print(entry_sno.get())
+            print(entry_sname.get())
+            print(entry_sclass.get())
+            print(entry_smajor.get())
+            print(entry_sdept.get())
+            print(entry_sbir.get())
+            print(entry_stele.get())
+
 
         btn_insert = Button(insert_window, text='确定', command=textPrint)
-        btn_quit = Button(insert_window, text='退出', command=textPrint)
+        btn_quit = Button(insert_window, text='退出', command=insert_window.destroy)
         btn_insert.place(x=150, y=450)
         btn_quit.place(x=250, y=450)
-
-        insert_window.geometry('400x500')
 
 
 table_op = TableOperation()
@@ -161,6 +160,7 @@ def textCommand():
 
 
 def chooseTable():
+    # print(var_user_name.get())
     global flag
     if flag == 1:
         logInWindow.destroy()
