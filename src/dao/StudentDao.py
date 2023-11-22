@@ -134,7 +134,7 @@ class StudentDao:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
             return self.su.executeList('select * from student limit %d,%d'
-                                        % (start, rows))
+                                        % (0, rows))
         except Exception as e:
             print(e)
             return '操作失败'

@@ -271,6 +271,45 @@ class TableOperation:
             table.place(width=800, height=300)
 
             loadStudent()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectAllStudent():
+            info_window = Tk()
+            info_window.title('学生信息')
+            info_window.geometry('800x500')
+
+            def loadStudent():
+                for i in table.get_children():
+                    table.delete(i)
+                for i in sd.list_student():
+                    table.insert('', END, values=i)
+                entry_sno.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'ssex', 'sclass', 'smajor', 'sdept', 'sbir', 'stele'),
+                             show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('ssex', width=100)
+            table.column('sclass', width=100)
+            table.column('smajor', width=100)
+            table.column('sdept', width=100)
+            table.column('sbir', width=100)
+            table.column('stele', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('ssex', text='性别')
+            table.heading('sclass', text='班级')
+            table.heading('smajor', text='专业')
+            table.heading('sdept', text='院系')
+            table.heading('sbir', text='出生日期')
+            table.heading('stele', text='联系电话')
+            table.place(width=800, height=300)
+
+            loadStudent()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
             info_window.mainloop()
 
 
@@ -298,7 +337,7 @@ class TableOperation:
         btn_select_sdept = Button(select_window, text='查询', command=selectStudent)
         btn_select_sdept.place(x=450, y=270)
 
-        btn_select_all = Button(select_window, text='查询全部数据', command=select_window.destroy)
+        btn_select_all = Button(select_window, text='查询全部学生', command=selectAllStudent)
         btn_quit = Button(select_window, text='退出', width=10, height=2, command=select_window.destroy)
         btn_select_all.place(x=10, y=330)
         btn_quit.place(x=270, y=330)
