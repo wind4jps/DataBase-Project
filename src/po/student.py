@@ -21,3 +21,18 @@ class Student:
 
     def __str__(self):
         return f"{self.sno},{self.sname},{self.ssex},{self.sclass},{self.smajor},{self.sdept},{self.sbir},{self.stele}"
+
+class Course:
+    cno: str
+    cname: str
+    tno: str
+    ccredit: int
+
+    def __init__(self, cno: str = None, cname: str = None, tno: str = None, ccredit: int = None):
+        self.cno = cno
+        self.cname = cname
+        self.tno = tno
+        self.ccredit = ccredit
+
+    def __str__(self):
+        return f"{self.cno},{self.cname},{self.tno},{self.ccredit}"

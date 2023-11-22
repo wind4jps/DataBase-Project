@@ -1,5 +1,6 @@
 from util.DbUtil import DbUtil
 from po.student import Student
+from po.student import Course
 
 class StudentDao:
     su: DbUtil
@@ -57,24 +58,6 @@ class StudentDao:
         try:
             assert isinstance(self.su, DbUtil)
             self.su.execute('delete from student')
-            return "操作成功"
-        except Exception as e:
-            print(e)
-            return "操作失败"
-
-    def selStudentBySno(self, s: Student):
-        try:
-            assert isinstance(self.su, DbUtil)
-            self.su.execute('select * from student where sno = %s', (s.sno))
-            return "操作成功"
-        except Exception as e:
-            print(e)
-            return "操作失败"
-
-    def selStudentBySname(self, s: Student):
-        try:
-            assert isinstance(self.su, DbUtil)
-            self.su.execute('select * from student where sname = %s', (s.sname))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -188,6 +171,127 @@ class StudentDao:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
             return self.su.executeList('select * from student limit %d,%d'
+                                        % (0, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+
+class CourseDao:
+    su: DbUtil
+
+    def __init__(self):
+        self.su = DbUtil()
+
+    def addCourse(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('insert into course values(%s,%s,%s,%d)',
+                            (c.cno, c.cname, c.tno, c.ccredit))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def delCourseByCno(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from course where cno = %s', (c.cno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def delCourseByCname(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from course where cname = %s', (c.cname))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def delCourseByTno(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from course where tno = %s', (c.tno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updCourseName(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update course set cname = %s where cno = %s', (c.cname, c.cno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updCourseTno(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update course set tno = %s where cno = %s', (c.tno, c.cno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updCourseCreit(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update course set ccredit = %d where cno = %s', (c.ccredit, c.cno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def list_course_by_cno(self, c: Course, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from course where cno = %s limit %d,%d'
+                                        % (c.cno, 0, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_course_by_cname(self, c: Course, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from course where cname = %s limit %d,%d'
+                                        % (c.cname, 0, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_course_by_tno(self, c: Course, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from course where tno = %s limit %d,%d'
+                                        % (c.tno, 0, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_course_by_ccredit(self, c: Course, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from course where ccredit = %d limit %d,%d'
+                                        % (c.ccredit, 0, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_course(self, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from course limit %d,%d'
                                         % (0, rows))
         except Exception as e:
             print(e)
