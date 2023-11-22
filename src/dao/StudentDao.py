@@ -80,10 +80,64 @@ class StudentDao:
             print(e)
             return "操作失败"
 
-    def updStudent(self, s: Student):   # TODO：单独更新某一行的某一属性
+    def updStudentName(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
             self.su.execute('update student set sname = %s where sno = %s', (s.sname, s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updStudentClass(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update student set sclass = %s where sno = %s', (s.sclass, s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updStudentSex(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update student set ssex = %s where sno = %s', (s.ssex, s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updStudentMajor(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update student set smajor = %s where sno = %s', (s.smajor, s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updStudentDept(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update student set sdept = %s where sno = %s', (s.sdept, s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updStudentBir(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update student set sbir = %s where sno = %s', (s.sbir, s.sno))
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def updStudentTele(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('update student set stele = %s where sno = %s', (s.stele, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -104,7 +158,7 @@ class StudentDao:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
             return self.su.executeList('select * from student where sclass = %s limit %d,%d'
-                                       % (s.sclass, start, rows))
+                                       % (s.sclass, 0, rows))
         except Exception as e:
             print(e)
             return '操作失败'
@@ -114,7 +168,7 @@ class StudentDao:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
             return self.su.executeList('select * from student where smajor = %s limit %d,%d'
-                                        % (s.smajor, start, rows))
+                                        % (s.smajor, 0, rows))
         except Exception as e:
             print(e)
             return '操作失败'
@@ -124,7 +178,7 @@ class StudentDao:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
             return self.su.executeList('select * from student where sdept = %s limit %d,%d'
-                                        % (s.sdept, start, rows))
+                                        % (s.sdept, 0, rows))
         except Exception as e:
             print(e)
             return '操作失败'

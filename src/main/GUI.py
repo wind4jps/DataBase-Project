@@ -342,6 +342,114 @@ class TableOperation:
         btn_select_all.place(x=10, y=330)
         btn_quit.place(x=270, y=330)
 
+    def updateWindow(self):
+        update_window = Tk(className='修改选项')
+        update_window.geometry('600x500')
+        Label(update_window, text='请输入要修改学生的学号', font=('宋体', 14)).place(x=10, y=50)
+        Label(update_window, text='新姓名', font=('宋体', 14)).place(x=10, y=100)
+        Label(update_window, text='新性别', font=('宋体', 14)).place(x=10, y=150)
+        Label(update_window, text='新班级', font=('宋体', 14)).place(x=10, y=200)
+        Label(update_window, text='新专业', font=('宋体', 14)).place(x=10, y=250)
+        Label(update_window, text='新院系', font=('宋体', 14)).place(x=10, y=300)
+        Label(update_window, text='新出生日期', font=('宋体', 14)).place(x=10, y=350)
+        Label(update_window, text='新联系电话', font=('宋体', 14)).place(x=10, y=400)
+
+        var_sno = StringVar()
+        entry_sno = Entry(update_window, textvariable=var_sno, font=('宋体', 14))
+        entry_sno.place(x=240, y=50)
+
+        var_sname = StringVar()
+        entry_sname = Entry(update_window, textvariable=var_sname, font=('宋体', 14))
+        entry_sname.place(x=100, y=100)
+
+        var_ssex = StringVar()
+        entry_ssex = Entry(update_window, textvariable=var_ssex, font=('宋体', 14))
+        entry_ssex.place(x=100, y=150)
+
+        var_sclass = StringVar()
+        entry_sclass = Entry(update_window, textvariable=var_sclass, font=('宋体', 14))
+        entry_sclass.place(x=100, y=200)
+
+        var_smajor = StringVar()
+        entry_smajor = Entry(update_window, textvariable=var_smajor, font=('宋体', 14))
+        entry_smajor.place(x=100, y=250)
+
+        var_sdept = StringVar()
+        entry_sdept = Entry(update_window, textvariable=var_sdept, font=('宋体', 14))
+        entry_sdept.place(x=100, y=300)
+
+        var_sbir = StringVar()
+        entry_sbir = Entry(update_window, textvariable=var_sbir, font=('宋体', 14))
+        entry_sbir.place(x=125, y=350)
+
+        var_stele = StringVar()
+        entry_stele = Entry(update_window, textvariable=var_stele, font=('宋体', 14))
+        entry_stele.place(x=125, y=400)
+
+        def updateStudent():
+            sno = entry_sno.get()
+            sname = entry_sname.get()
+            ssex = entry_ssex.get()
+            sclass = entry_sclass.get()
+            smajor = entry_smajor.get()
+            sdept = entry_sdept.get()
+            sbir = entry_sbir.get()
+            stele = entry_stele.get()
+            flag = True
+            if sno != '':
+                if sname != '':
+                    r1 = sd.updStudentName(Student(sno=sno, sname=sname))
+                    if r1 == "修改失败":
+                        tkinter.messagebox.showerror(r1, "学生姓名修改失败")
+                        flag = False
+                if ssex != '':
+                    r2 = sd.updStudentSex(Student(sno=sno, ssex=ssex))
+                    if r2 == "修改失败":
+                        tkinter.messagebox.showerror(r2, "学生性别修改失败")
+                        flag = False
+                if sclass != '':
+                    r3 = sd.updStudentClass(Student(sno=sno, sclass=sclass))
+                    if r3 == "修改失败":
+                        tkinter.messagebox.showerror(r3, "学生班级修改失败")
+                        flag = False
+                if smajor != '':
+                    r4 = sd.updStudentMajor(Student(sno=sno, smajor=smajor))
+                    if r4 == "修改失败":
+                        tkinter.messagebox.showerror(r4, "学生专业修改失败")
+                        flag = False
+                if sdept != '':
+                    r5 = sd.updStudentDept(Student(sno=sno, sdept=sdept))
+                    if r5 == "修改失败":
+                        tkinter.messagebox.showerror(r5, "学生院系修改失败")
+                        flag = False
+                if sbir != '':
+                    r6 = sd.updStudentBir(Student(sno=sno, sbir=sbir))
+                    if r6 == "修改失败":
+                        tkinter.messagebox.showerror(r6, "学生出生日期修改失败")
+                        flag = False
+                if stele != '':
+                    r7 = sd.updStudentTele(Student(sno=sno, stele=stele))
+                    if r7 == "修改失败":
+                        tkinter.messagebox.showerror(r7, "学生联系电话修改失败")
+                        flag = False
+                entry_sno.delete(0, END)
+                entry_sname.delete(0, END)
+                entry_ssex.delete(0, END)
+                entry_sclass.delete(0, END)
+                entry_smajor.delete(0, END)
+                entry_sdept.delete(0, END)
+                entry_sbir.delete(0, END)
+                entry_stele.delete(0, END)
+                if flag:
+                    tkinter.messagebox.showinfo("操作成功", "该学生信息修改成功")
+            else:
+                tkinter.messagebox.showerror("操作失败", "修改的学生学号不能为空")
+
+        btn_insert = Button(update_window, text='修改', command=updateStudent)
+        btn_quit = Button(update_window, text='退出', command=update_window.destroy)
+        btn_insert.place(x=220, y=450)
+        btn_quit.place(x=320, y=450)
+
 
 table_op = TableOperation()
 
@@ -359,10 +467,11 @@ def chooseOp():
     Button(choose_op_window, text='查找', width=width, height=height,
            command=table_op.selectWindow, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
     Button(choose_op_window, text='修改', width=width, height=height,
-           command=textCommand, bg='light yellow', font='楷体').grid(row=30, column=1, padx=10, pady=20)
+           command=table_op.updateWindow, bg='light yellow', font='楷体').grid(row=30, column=1, padx=10, pady=20)
     Button(choose_op_window, text='返回', width=width, height=height,
            command=chooseTable, bg='light cyan', font='楷体').grid(row=40, column=1, padx=10, pady=20)
     choose_op_window.geometry('750x400')
+
 
 def textCommand():
     print("ok")
@@ -387,7 +496,6 @@ def chooseTable():
            command=chooseOp, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
     Button(choose_table_window, text='课程信息表', width=width, height=height,
            command=chooseOp, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
-
 
 
 flag = 1
