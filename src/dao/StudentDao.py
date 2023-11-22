@@ -89,7 +89,47 @@ class StudentDao:
             print(e)
             return "操作失败"
 
-    def list_book(self, page: int = 1, rows: int = 10):
+    def list_student_by_sno(self, s: Student, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from student where sno = %s limit %d,%d'
+                                        % (s.sno, 0, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_student_by_sclass(self, s: Student, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from student where sclass = %s limit %d,%d'
+                                       % (s.sclass, start, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_student_by_smajor(self, s: Student, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from student where smajor = %s limit %d,%d'
+                                        % (s.smajor, start, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_student_by_sdept(self, s: Student, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from student where sdept = %s limit %d,%d'
+                                        % (s.sdept, start, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
+    def list_student(self, page: int = 1, rows: int = 10):
         try:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
