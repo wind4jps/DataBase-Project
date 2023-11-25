@@ -186,7 +186,7 @@ class CourseDao:
     def addCourse(self, c: Course):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('insert into course values(%s,%s,%s,%d)',
+            self.su.execute('insert into course values(%s,%s,%s,%s)',
                             (c.cno, c.cname, c.tno, c.ccredit))
             return "操作成功"
         except Exception as e:
