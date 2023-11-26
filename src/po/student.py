@@ -36,3 +36,18 @@ class Course:
 
     def __str__(self):
         return f"{self.cno},{self.cname},{self.tno},{self.ccredit}"
+
+class SC:
+    sno: str
+    cno: str
+    grade: int
+    ccredit: int
+
+    def __init__(self, sno: str = None, cno: str = None, grade: int = None, ccredit: int = None):
+        self.sno = sno
+        self.cno = cno
+        self.grade = grade
+        self.ccredit = ccredit
+
+    def __str__(self):
+        return f"{self.sno},{self.cno},{self.grade},{self.ccredit}"
