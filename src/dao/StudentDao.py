@@ -66,7 +66,7 @@ class StudentDao:
     def updStudentName(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('update student set sname = %s where sno = %s', (s.sname, s.sno))
+            self.su.execute('update student set sname = "%s" where sno = %s', (s.sname, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -93,7 +93,7 @@ class StudentDao:
     def updStudentMajor(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('update student set smajor = %s where sno = %s', (s.smajor, s.sno))
+            self.su.execute('update student set smajor = "%s" where sno = %s', (s.smajor, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -102,7 +102,7 @@ class StudentDao:
     def updStudentDept(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('update student set sdept = %s where sno = %s', (s.sdept, s.sno))
+            self.su.execute('update student set sdept = "%s" where sno = %s', (s.sdept, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -150,7 +150,7 @@ class StudentDao:
         try:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
-            return self.su.executeList('select * from student where smajor = %s limit %d,%d'
+            return self.su.executeList('select * from student where smajor = "%s" limit %d,%d'
                                         % (s.smajor, 0, rows))
         except Exception as e:
             print(e)
@@ -160,7 +160,7 @@ class StudentDao:
         try:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
-            return self.su.executeList('select * from student where sdept = %s limit %d,%d'
+            return self.su.executeList('select * from student where sdept = "%s" limit %d,%d'
                                         % (s.sdept, 0, rows))
         except Exception as e:
             print(e)
@@ -220,6 +220,15 @@ class CourseDao:
             print(e)
             return "操作失败"
 
+    def delCourseAll(self):
+        try:
+            assert isinstance(self.su, DbUtil)
+            self.su.execute('delete from course')
+            return "操作成功"
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
     def updCourseName(self, c: Course):
         try:
             assert isinstance(self.su, DbUtil)
@@ -241,11 +250,12 @@ class CourseDao:
     def updCourseCreit(self, c: Course):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('update course set ccredit = %d where cno = %s', (c.ccredit, c.cno))
+            self.su.execute('update course set ccredit = %s where cno = %s', (c.ccredit, c.cno))
             return "操作成功"
         except Exception as e:
             print(e)
             return "操作失败"
+
 
     def list_course_by_cno(self, c: Course, page: int = 1, rows: int = 10):
         try:
@@ -261,7 +271,7 @@ class CourseDao:
         try:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
-            return self.su.executeList('select * from course where cname = %s limit %d,%d'
+            return self.su.executeList('select * from course where cname = "%s" limit %d,%d'
                                         % (c.cname, 0, rows))
         except Exception as e:
             print(e)
@@ -281,7 +291,7 @@ class CourseDao:
         try:
             assert isinstance(self.su, DbUtil)
             start = (page - 1) * rows + 1
-            return self.su.executeList('select * from course where ccredit = %d limit %d,%d'
+            return self.su.executeList('select * from course where ccredit = %s limit %d,%d'
                                         % (c.ccredit, 0, rows))
         except Exception as e:
             print(e)
