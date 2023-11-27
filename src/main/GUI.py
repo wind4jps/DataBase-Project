@@ -624,7 +624,7 @@ class CourseTableOperation:
         btn_select_ccredit = Button(select_window, text='查询', command=selectCourse)
         btn_select_ccredit.place(x=490, y=270)
 
-        btn_select_all = Button(select_window, text='查询全部学生', command=selectAllCourse)
+        btn_select_all = Button(select_window, text='查询全部课程', command=selectAllCourse)
         btn_quit = Button(select_window, text='退出', width=10, height=2, command=select_window.destroy)
         btn_select_all.place(x=10, y=330)
         btn_quit.place(x=270, y=330)
