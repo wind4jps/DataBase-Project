@@ -62,6 +62,15 @@ class StudentDao:
             print(e)
             return "操作失败"
 
+    def selectSnameBySno(self, s: Student):
+        try:
+            assert isinstance(self.su, DbUtil)
+            val_cno = self.su.executeList('select sname from student where sno = %s' % (s.sno))
+            return val_cno
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
     def updStudentName(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
@@ -306,6 +315,24 @@ class CourseDao:
             print(e)
             return '操作失败'
 
+    def selectCreditByCno(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            val_cno = self.su.executeList('select ccredit from course where cno = %s' % (c.cno))
+            return val_cno
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
+    def selectCnameByCno(self, c: Course):
+        try:
+            assert isinstance(self.su, DbUtil)
+            val_cno = self.su.executeList('select cname from course where cno = %s' % (c.cno))
+            return val_cno
+        except Exception as e:
+            print(e)
+            return "操作失败"
+
 class SCDao:
     su: DbUtil
 
@@ -325,7 +352,7 @@ class SCDao:
     def delSCBySno(self, sc: SC):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('delete from sc where cno = %s ', (sc.cno))
+            self.su.execute('delete from sc where sno = %s ', (sc.sno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -343,7 +370,7 @@ class SCDao:
     def delSCBySnoAndCno(self, sc: SC):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('delete from sc where sno = %s and cno = %cno', (sc.sno, sc.cno))
+            self.su.execute('delete from sc where sno = %s and cno = %s', (sc.sno, sc.cno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -396,6 +423,16 @@ class SCDao:
             print(e)
             return '操作失败'
 
+    def list_sc_by_sno_and_cno(self, sc: SC, page: int = 1, rows: int = 10):
+        try:
+            assert isinstance(self.su, DbUtil)
+            start = (page - 1) * rows + 1
+            return self.su.executeList('select * from sc where sno = %s and cno = %s limit %d,%d'
+                                        % (sc.sno, sc.cno, 0, rows))
+        except Exception as e:
+            print(e)
+            return '操作失败'
+
     def list_sc_by_ccredit(self, sc: SC, page: int = 1, rows: int = 10):
         try:
             assert isinstance(self.su, DbUtil)
@@ -419,8 +456,8 @@ class SCDao:
     def avgGradeBySno(self, sc: SC):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('select Gavg from s_g where cno = %s', (sc.sno))
-            return "操作成功"
+            val = self.su.executeList('select Gavg from s_g where sno = %s' % (sc.sno))
+            return val
         except Exception as e:
             print(e)
             return "操作失败"
@@ -428,8 +465,8 @@ class SCDao:
     def avgGradeByCno(self, sc: SC):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('select Gavg from c_g where cno = %s', (sc.cno))
-            return "操作成功"
+            val = self.su.executeList('select Gavg from c_g where cno = %s' % (sc.cno))
+            return val
         except Exception as e:
             print(e)
             return "操作失败"

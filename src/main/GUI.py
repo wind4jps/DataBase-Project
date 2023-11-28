@@ -7,6 +7,7 @@ from po.student import *
 
 sd = StudentDao()
 cd = CourseDao()
+scd = SCDao()
 
 
 class StudentTableOperation:
@@ -172,35 +173,132 @@ class StudentTableOperation:
         Label(select_window, text='查询该专业的全部学生', font=('宋体', 14)).place(x=10, y=200)
         Label(select_window, text='查询该院系的全部学生', font=('宋体', 14)).place(x=10, y=275)
 
-        def selectStudent():
+        def selectStudentBySno():
             info_window = Tk()
             info_window.title('学生信息')
             info_window.geometry('800x500')
 
             def loadStudent():
                 sno = entry_sno.get()
+                for i in table.get_children():
+                    table.delete(i)
+                for i in sd.list_student_by_sno(Student(sno=sno)):
+                    table.insert('', END, values=i)
+                entry_sno.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'ssex', 'sclass', 'smajor', 'sdept', 'sbir', 'stele'),
+                             show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('ssex', width=100)
+            table.column('sclass', width=100)
+            table.column('smajor', width=100)
+            table.column('sdept', width=100)
+            table.column('sbir', width=100)
+            table.column('stele', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('ssex', text='性别')
+            table.heading('sclass', text='班级')
+            table.heading('smajor', text='专业')
+            table.heading('sdept', text='院系')
+            table.heading('sbir', text='出生日期')
+            table.heading('stele', text='联系电话')
+            table.place(width=800, height=300)
+
+            loadStudent()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectStudentBySclass():
+            info_window = Tk()
+            info_window.title('学生信息')
+            info_window.geometry('800x500')
+
+            def loadStudent():
                 sclass = entry_sclass.get()
+                for i in table.get_children():
+                    table.delete(i)
+                for i in sd.list_student_by_sclass(Student(sclass=sclass)):
+                    table.insert('', END, values=i)
+                entry_sclass.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'ssex', 'sclass', 'smajor', 'sdept', 'sbir', 'stele'),
+                             show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('ssex', width=100)
+            table.column('sclass', width=100)
+            table.column('smajor', width=100)
+            table.column('sdept', width=100)
+            table.column('sbir', width=100)
+            table.column('stele', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('ssex', text='性别')
+            table.heading('sclass', text='班级')
+            table.heading('smajor', text='专业')
+            table.heading('sdept', text='院系')
+            table.heading('sbir', text='出生日期')
+            table.heading('stele', text='联系电话')
+            table.place(width=800, height=300)
+
+            loadStudent()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectStudentBySmajor():
+            info_window = Tk()
+            info_window.title('学生信息')
+            info_window.geometry('800x500')
+
+            def loadStudent():
                 smajor = entry_smajor.get()
+                for i in table.get_children():
+                    table.delete(i)
+                for i in sd.list_student_by_smajor(Student(smajor=smajor)):
+                    table.insert('', END, values=i)
+                entry_smajor.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'ssex', 'sclass', 'smajor', 'sdept', 'sbir', 'stele'),
+                             show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('ssex', width=100)
+            table.column('sclass', width=100)
+            table.column('smajor', width=100)
+            table.column('sdept', width=100)
+            table.column('sbir', width=100)
+            table.column('stele', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('ssex', text='性别')
+            table.heading('sclass', text='班级')
+            table.heading('smajor', text='专业')
+            table.heading('sdept', text='院系')
+            table.heading('sbir', text='出生日期')
+            table.heading('stele', text='联系电话')
+            table.place(width=800, height=300)
+
+            loadStudent()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectStudentBySdept():
+            info_window = Tk()
+            info_window.title('学生信息')
+            info_window.geometry('800x500')
+
+            def loadStudent():
                 sdept = entry_sdept.get()
                 for i in table.get_children():
                     table.delete(i)
-                if sno != '':
-                    for i in sd.list_student_by_sno(Student(sno=sno)):
-                        table.insert('', END, values=i)
-                    entry_sno.delete(0, END)
-                elif sclass != '':
-                    for i in sd.list_student_by_sclass(Student(sclass=sclass)):
-                        table.insert('', END, values=i)
-                    entry_sclass.delete(0, END)
-                elif smajor != '':
-                    for i in sd.list_student_by_smajor(Student(smajor=smajor)):
-                        table.insert('', END, values=i)
-                    entry_smajor.delete(0, END)
-                elif sdept != '':
-                    for i in sd.list_student_by_sdept(Student(sdept=sdept)):
-                        table.insert('', END, values=i)
-                    entry_sdept.delete(0, END)
-                # select_window.destroy()
+                for i in sd.list_student_by_sdept(Student(sdept=sdept)):
+                    table.insert('', END, values=i)
+                entry_sdept.delete(0, END)
 
             table = Treeview(info_window, columns=('sno', 'sname', 'ssex', 'sclass', 'smajor', 'sdept', 'sbir', 'stele'),
                              show="headings")
@@ -268,25 +366,25 @@ class StudentTableOperation:
         var_sno = StringVar()
         entry_sno = Entry(select_window, textvariable=var_sno, font=('宋体', 14))
         entry_sno.place(x=220, y=50)
-        btn_select_sno = Button(select_window, text='查询', command=selectStudent)
+        btn_select_sno = Button(select_window, text='查询', command=selectStudentBySno)
         btn_select_sno.place(x=450, y=45)
 
         var_sclass = StringVar()
         entry_sclass = Entry(select_window, textvariable=var_sclass, font=('宋体', 14))
         entry_sclass.place(x=220, y=125)
-        btn_select_sclass = Button(select_window, text='查询', command=selectStudent)
+        btn_select_sclass = Button(select_window, text='查询', command=selectStudentBySclass)
         btn_select_sclass.place(x=450, y=120)
 
         var_smajor = StringVar()
         entry_smajor = Entry(select_window, textvariable=var_smajor, font=('宋体', 14))
         entry_smajor.place(x=220, y=200)
-        btn_select_smajor = Button(select_window, text='查询', command=selectStudent)
+        btn_select_smajor = Button(select_window, text='查询', command=selectStudentBySmajor)
         btn_select_smajor.place(x=450, y=195)
 
         var_sdept = StringVar()
         entry_sdept = Entry(select_window, textvariable=var_sdept, font=('宋体', 14))
         entry_sdept.place(x=220, y=275)
-        btn_select_sdept = Button(select_window, text='查询', command=selectStudent)
+        btn_select_sdept = Button(select_window, text='查询', command=selectStudentBySdept)
         btn_select_sdept.place(x=450, y=270)
 
         btn_select_all = Button(select_window, text='查询全部学生', command=selectAllStudent)
@@ -525,35 +623,105 @@ class CourseTableOperation:
         Label(select_window, text='查询该教工号教师的全部课程', font=('宋体', 14)).place(x=10, y=200)
         Label(select_window, text='查询该学分的所有课程', font=('宋体', 14)).place(x=10, y=275)
 
-        def selectCourse():
+        def selectCourseByCno():
             info_window = Tk()
             info_window.title('课程信息')
             info_window.geometry('800x500')
 
             def loadCourse():
                 cno = entry_cno.get()
+                for i in table.get_children():
+                    table.delete(i)
+                for i in cd.list_course_by_cno(Course(cno=cno)):
+                    table.insert('', END, values=i)
+                entry_cno.delete(0, END)
+
+            table = Treeview(info_window, columns=('cno', 'cname', 'tno', 'ccredit'), show="headings")
+            table.column('cno', width=100)
+            table.column('cname', width=100)
+            table.column('tno', width=100)
+            table.column('ccredit', width=100)
+            table.heading('cno', text='课程号')
+            table.heading('cname', text='课程名')
+            table.heading('tno', text='教工号')
+            table.heading('ccredit', text='学分')
+            table.place(width=800, height=300)
+
+            loadCourse()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectCourseByCname():
+            info_window = Tk()
+            info_window.title('课程信息')
+            info_window.geometry('800x500')
+
+            def loadCourse():
                 cname = entry_cname.get()
+                for i in table.get_children():
+                    table.delete(i)
+                for i in cd.list_course_by_cname(Course(cname=cname)):
+                    table.insert('', END, values=i)
+                entry_cname.delete(0, END)
+
+            table = Treeview(info_window, columns=('cno', 'cname', 'tno', 'ccredit'), show="headings")
+            table.column('cno', width=100)
+            table.column('cname', width=100)
+            table.column('tno', width=100)
+            table.column('ccredit', width=100)
+            table.heading('cno', text='课程号')
+            table.heading('cname', text='课程名')
+            table.heading('tno', text='教工号')
+            table.heading('ccredit', text='学分')
+            table.place(width=800, height=300)
+
+            loadCourse()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectCourseByTno():
+            info_window = Tk()
+            info_window.title('课程信息')
+            info_window.geometry('800x500')
+
+            def loadCourse():
                 tno = entry_tno.get()
+                for i in table.get_children():
+                    table.delete(i)
+                for i in cd.list_course_by_tno(Course(tno=tno)):
+                    table.insert('', END, values=i)
+                entry_tno.delete(0, END)
+
+            table = Treeview(info_window, columns=('cno', 'cname', 'tno', 'ccredit'), show="headings")
+            table.column('cno', width=100)
+            table.column('cname', width=100)
+            table.column('tno', width=100)
+            table.column('ccredit', width=100)
+            table.heading('cno', text='课程号')
+            table.heading('cname', text='课程名')
+            table.heading('tno', text='教工号')
+            table.heading('ccredit', text='学分')
+            table.place(width=800, height=300)
+
+            loadCourse()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectCourseByCredit():
+            info_window = Tk()
+            info_window.title('课程信息')
+            info_window.geometry('800x500')
+
+            def loadCourse():
                 ccredit = entry_ccredit.get()
                 for i in table.get_children():
                     table.delete(i)
-                if cno != '':
-                    for i in cd.list_course_by_cno(Course(cno=cno)):
-                        table.insert('', END, values=i)
-                    entry_cno.delete(0, END)
-                elif cname != '':
-                    for i in cd.list_course_by_cname(Course(cname=cname)):
-                        table.insert('', END, values=i)
-                    entry_cname.delete(0, END)
-                elif tno != '':
-                    for i in cd.list_course_by_tno(Course(tno=tno)):
-                        table.insert('', END, values=i)
-                    entry_tno.delete(0, END)
-                elif ccredit != '':
-                    for i in cd.list_course_by_ccredit(Course(ccredit=ccredit)):
-                        table.insert('', END, values=i)
-                    entry_ccredit.delete(0, END)
-                # select_window.destroy()
+                for i in cd.list_course_by_ccredit(Course(ccredit=ccredit)):
+                    table.insert('', END, values=i)
+                entry_ccredit.delete(0, END)
 
             table = Treeview(info_window, columns=('cno', 'cname', 'tno', 'ccredit'), show="headings")
             table.column('cno', width=100)
@@ -603,25 +771,25 @@ class CourseTableOperation:
         var_cno = StringVar()
         entry_cno = Entry(select_window, textvariable=var_cno, font=('宋体', 14))
         entry_cno.place(x=270, y=50)
-        btn_select_cno = Button(select_window, text='查询', command=selectCourse)
+        btn_select_cno = Button(select_window, text='查询', command=selectCourseByCno)
         btn_select_cno.place(x=490, y=45)
 
         var_cname = StringVar()
         entry_cname = Entry(select_window, textvariable=var_cname, font=('宋体', 14))
         entry_cname.place(x=270, y=125)
-        btn_select_cname = Button(select_window, text='查询', command=selectCourse)
+        btn_select_cname = Button(select_window, text='查询', command=selectCourseByCname)
         btn_select_cname.place(x=490, y=120)
 
         var_tno = StringVar()
         entry_tno = Entry(select_window, textvariable=var_tno, font=('宋体', 14))
         entry_tno.place(x=270, y=200)
-        btn_select_tno = Button(select_window, text='查询', command=selectCourse)
+        btn_select_tno = Button(select_window, text='查询', command=selectCourseByTno)
         btn_select_tno.place(x=490, y=195)
 
         var_ccredit = IntVar()
         entry_ccredit = Entry(select_window, textvariable=var_ccredit, font=('宋体', 14))
         entry_ccredit.place(x=270, y=275)
-        btn_select_ccredit = Button(select_window, text='查询', command=selectCourse)
+        btn_select_ccredit = Button(select_window, text='查询', command=selectCourseByCredit)
         btn_select_ccredit.place(x=490, y=270)
 
         btn_select_all = Button(select_window, text='查询全部课程', command=selectAllCourse)
@@ -690,8 +858,358 @@ class CourseTableOperation:
         btn_quit.place(x=320, y=250)
 
 
+class SCTableOperation:
+    def insertWindow(self):
+        insert_window = Tk(className='增加选项')
+        insert_window.geometry('400x250')
+        Label(insert_window, text='学号', font=('宋体', 14)).place(x=10, y=50)
+        Label(insert_window, text='课程号', font=('宋体', 14)).place(x=10, y=100)
+        Label(insert_window, text='课程成绩', font=('宋体', 14)).place(x=10, y=150)
+
+        var_sno = StringVar()
+        entry_sno = Entry(insert_window, textvariable=var_sno, font=('宋体', 14))
+        entry_sno.place(x=150, y=50)
+
+        var_cno = StringVar()
+        entry_cno = Entry(insert_window, textvariable=var_cno, font=('宋体', 14))
+        entry_cno.place(x=150, y=100)
+
+        var_grade = IntVar()
+        entry_grade = Entry(insert_window, textvariable=var_grade, font=('宋体', 14))
+        entry_grade.place(x=150, y=150)
+
+        def addSC():
+            sno = entry_sno.get()
+            cno = entry_cno.get()
+            grade = entry_grade.get()
+            tuple_ccredit = cd.selectCreditByCno(Course(cno=cno))
+            ccredit = tuple_ccredit[0][0]
+            if sno is not None and cno is not None and ccredit is not None:
+                r = scd.addSC(SC(sno=sno, cno=cno, grade=grade, ccredit=ccredit))
+                if r == "操作失败":
+                    tkinter.messagebox.showerror(r, "数据增加失败")
+                else:
+                    tkinter.messagebox.showinfo(r, "成功增加数据")
+                # 清空输入文本框
+                entry_sno.delete(0, END)
+                entry_cno.delete(0, END)
+                entry_grade.delete(0, END)
+
+        btn_insert = Button(insert_window, text='确定', command=addSC)
+        btn_quit = Button(insert_window, text='退出', command=insert_window.destroy)
+        btn_insert.place(x=150, y=200)
+        btn_quit.place(x=250, y=200)
+
+    def deleteWindow(self):
+        delete_window = Tk(className='删除选项')
+        delete_window.geometry('700x300')
+        Label(delete_window, text='删除该学号学生的全部信息', font=('宋体', 14)).place(x=10, y=50)
+        Label(delete_window, text='删除该课程号的全部信息', font=('宋体', 14)).place(x=10, y=125)
+        Label(delete_window, text='删除该学生该门课程的信息', font=('宋体', 14)).place(x=10, y=200)
+
+        def deleteSC():
+            sno = entry_sno.get()
+            cno = entry_cno.get()
+            sno1 = entry_sno1.get()
+            cno1 = entry_cno1.get()
+            if sno != '':
+                r = scd.delSCBySno(SC(sno=sno))
+                if r == "操作失败":
+                    tkinter.messagebox.showerror(r, '删除失败')
+                else:
+                    tkinter.messagebox.showinfo(r, '成功删除')
+                entry_sno.delete(0, END)
+            elif cno != '':
+                r = scd.delSCByCno(SC(cno=cno))
+                if r == "操作失败":
+                    tkinter.messagebox.showerror(r, '删除失败')
+                else:
+                    tkinter.messagebox.showinfo(r, '成功删除')
+                entry_cno.delete(0, END)
+            elif sno1 != '' and cno1 != '':
+                r = scd.delSCBySnoAndCno(SC(sno=sno1, cno=cno1))
+                if r == "操作失败":
+                    tkinter.messagebox.showerror(r, '删除失败')
+                else:
+                    tkinter.messagebox.showinfo(r, '成功删除')
+                entry_sno1.delete(0, END)
+                entry_cno1.delete(0, END)
+
+        def deletAllSC():
+            msg = tkinter.messagebox.askokcancel('确认', '确定要删除所有数据吗?')
+            if msg:
+                r = scd.delSCAll()
+                if r == "操作失败":
+                    tkinter.messagebox.showerror(r, '删除失败')
+                else:
+                    tkinter.messagebox.showinfo(r, '成功删除')
+
+
+        var_sno = StringVar()
+        entry_sno = Entry(delete_window, textvariable=var_sno, font=('宋体', 14))
+        entry_sno.place(x=270, y=50)
+        btn_delete_sno = Button(delete_window, text='删除', command=deleteSC)
+        btn_delete_sno.place(x=485, y=45)
+
+        var_cno = StringVar()
+        entry_cno = Entry(delete_window, textvariable=var_cno, font=('宋体', 14))
+        entry_cno.place(x=270, y=125)
+        btn_delete_cno = Button(delete_window, text='删除', command=deleteSC)
+        btn_delete_cno.place(x=485, y=120)
+
+        var_sno1 = StringVar()
+        entry_sno1 = Entry(delete_window, textvariable=var_sno1, width=15, font=('宋体', 14))
+        entry_sno1.place(x=270, y=200)
+        var_cno1 = StringVar()
+        entry_cno1 = Entry(delete_window, textvariable=var_cno1, width=15, font=('宋体', 14))
+        entry_cno1.place(x=450, y=200)
+        btn_delete_sno_cno = Button(delete_window, text='删除', command=deleteSC)
+        btn_delete_sno_cno.place(x=615, y=195)
+
+        btn_delete_all = Button(delete_window, text='删除全部数据', command=deletAllSC)
+        btn_quit = Button(delete_window, text='退出', width=10, height=2, command=delete_window.destroy)
+        btn_delete_all.place(x=10, y=240)
+        btn_quit.place(x=300, y=240)
+
+    def selectWindow(self):
+        # choose_op_window.destroy()
+        select_window = Tk(className='查询选项')
+        select_window.geometry('760x320')
+        Label(select_window, text='查询该学号学生的全部选课情况', font=('宋体', 14)).place(x=10, y=50)
+        Label(select_window, text='查询该课程号课程的全部选课情况', font=('宋体', 14)).place(x=10, y=125)
+        Label(select_window, text='查询该学号学生该门课程号课程选课情况', font=('宋体', 14)).place(x=10, y=200)
+
+        def selectSCBySno():
+            info_window = Tk()
+            info_window.title('学生课程信息')
+            info_window.geometry('800x500')
+
+            def loadSC():
+                sno = entry_sno.get()
+                sname_tuple = sd.selectSnameBySno(Student(sno=sno))
+                sname = sname_tuple[0][0]
+                cname_tuple = []
+                val = scd.list_sc_by_sno(SC(sno=sno))
+                avg_grade_tuple = scd.avgGradeBySno(SC(sno=sno))
+                avg_grade = avg_grade_tuple[0][0]
+                for i in range(0, len(val)):
+                    cname_tuple.append(cd.selectCnameByCno(Course(cno=val[i][1]))[0][0])
+                for i in table.get_children():
+                    table.delete(i)
+                for i in range(0, len(val)):
+                    table.insert('', END, values=(val[i][0], sname, val[i][1], cname_tuple[i], val[i][2], val[i][3]))
+                entry_sno.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'cno', 'cname', 'grade', 'ccredit'), show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('cno', width=100)
+            table.column('cname', width=100)
+            table.column('grade', width=100)
+            table.column('ccredit', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('cno', text='课程号')
+            table.heading('cname', text='课程名')
+            table.heading('grade', text='课程成绩')
+            table.heading('ccredit', text='学分')
+            table.place(width=800, height=300)
+
+            loadSC()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectSCByCno():
+            info_window = Tk()
+            info_window.title('学生课程信息')
+            info_window.geometry('800x500')
+
+            def loadSC():
+                cno = entry_cno.get()
+                cname_tuple = cd.selectCnameByCno(Course(cno=cno))
+                cname = cname_tuple[0][0]
+                sname_tuple = []
+                val = scd.list_sc_by_cno(SC(cno=cno))
+                avg_grade_tuple = scd.avgGradeByCno(SC(cno=cno))
+                avg_grade = avg_grade_tuple[0][0]
+                for i in range(0, len(val)):
+                    sname_tuple.append(sd.selectSnameBySno(Student(sno=val[i][0]))[0][0])
+                for i in table.get_children():
+                    table.delete(i)
+                for i in range(0, len(val)):
+                    table.insert('', END, values=(val[i][0], sname_tuple[i], val[i][1], cname, val[i][2], val[i][3]))
+                entry_cno.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'cno', 'cname', 'grade', 'ccredit'), show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('cno', width=100)
+            table.column('cname', width=100)
+            table.column('grade', width=100)
+            table.column('ccredit', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('cno', text='课程号')
+            table.heading('cname', text='课程名')
+            table.heading('grade', text='课程成绩')
+            table.heading('ccredit', text='学分')
+            table.place(width=800, height=300)
+
+            loadSC()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectSCBySnoAndCno():
+            info_window = Tk()
+            info_window.title('学生课程信息')
+            info_window.geometry('800x500')
+
+            def loadSC():
+                sno = entry_sno1.get()
+                sname_tuple = sd.selectSnameBySno(Student(sno=sno))
+                sname = sname_tuple[0][0]
+                cno = entry_cno1.get()
+                cname_tuple = cd.selectCnameByCno(Course(cno=cno))
+                cname = cname_tuple[0][0]
+                val = scd.list_sc_by_sno_and_cno(SC(sno=sno, cno=cno))
+                for i in table.get_children():
+                    table.delete(i)
+                for i in range(0, len(val)):
+                    table.insert('', END, values=(val[i][0], sname, val[i][1], cname, val[i][2], val[i][3]))
+                entry_sno1.delete(0, END)
+                entry_cno1.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'cno', 'cname', 'grade', 'ccredit'), show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('cno', width=100)
+            table.column('cname', width=100)
+            table.column('grade', width=100)
+            table.column('ccredit', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('cno', text='课程号')
+            table.heading('cname', text='课程名')
+            table.heading('grade', text='课程成绩')
+            table.heading('ccredit', text='学分')
+            table.place(width=800, height=300)
+
+            loadSC()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        def selectAllSC():
+            info_window = Tk()
+            info_window.title('学生课程信息')
+            info_window.geometry('800x500')
+
+            def loadSC():
+                sname_tuple = []
+                cname_tuple = []
+                val = scd.list_sc()
+                for i in range(0, len(val)):
+                    sname_tuple.append(sd.selectSnameBySno(Student(sno=val[i][0]))[0][0])
+                for i in range(0, len(val)):
+                    cname_tuple.append(cd.selectCnameByCno(Course(cno=val[i][1]))[0][0])
+                for i in table.get_children():
+                    table.delete(i)
+                for i in range(0, len(val)):
+                    table.insert('', END, values=(val[i][0], sname_tuple[i], val[i][1], cname_tuple[i], val[i][2], val[i][3]))
+                entry_sno1.delete(0, END)
+                entry_cno1.delete(0, END)
+
+            table = Treeview(info_window, columns=('sno', 'sname', 'cno', 'cname', 'grade', 'ccredit'), show="headings")
+            table.column('sno', width=100)
+            table.column('sname', width=100)
+            table.column('cno', width=100)
+            table.column('cname', width=100)
+            table.column('grade', width=100)
+            table.column('ccredit', width=100)
+            table.heading('sno', text='学号')
+            table.heading('sname', text='姓名')
+            table.heading('cno', text='课程号')
+            table.heading('cname', text='课程名')
+            table.heading('grade', text='课程成绩')
+            table.heading('ccredit', text='学分')
+            table.place(width=800, height=300)
+
+            loadSC()
+            btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
+            btn_quit.place(x=360, y=400)
+            info_window.mainloop()
+
+        var_sno = StringVar()
+        entry_sno = Entry(select_window, textvariable=var_sno, font=('宋体', 14))
+        entry_sno.place(x=310, y=50)
+        btn_select_sno = Button(select_window, text='查询', command=selectSCBySno)
+        btn_select_sno.place(x=530, y=45)
+
+        var_cno = StringVar()
+        entry_cno = Entry(select_window, textvariable=var_cno, font=('宋体', 14))
+        entry_cno.place(x=310, y=125)
+        btn_select_cno = Button(select_window, text='查询', command=selectSCByCno)
+        btn_select_cno.place(x=530, y=120)
+
+        var_sno1 = StringVar()
+        entry_sno1 = Entry(select_window, textvariable=var_sno1, width=15, font=('宋体', 14))
+        entry_sno1.place(x=360, y=200)
+        var_cno1 = StringVar()
+        entry_cno1 = Entry(select_window, textvariable=var_cno1, width=15, font=('宋体', 14))
+        entry_cno1.place(x=540, y=200)
+        btn_select_tno = Button(select_window, text='查询', command=selectSCBySnoAndCno)
+        btn_select_tno.place(x=705, y=195)
+
+        btn_select_all = Button(select_window, text='查询全部信息', command=selectAllSC)
+        btn_quit = Button(select_window, text='退出', width=10, height=2, command=select_window.destroy)
+        btn_select_all.place(x=10, y=250)
+        btn_quit.place(x=340, y=250)
+
+    def updateWindow(self):
+        update_window = Tk(className='修改选项')
+        update_window.geometry('600x250')
+        Label(update_window, text='请输入要修改学生的学号', font=('宋体', 14)).place(x=10, y=50)
+        Label(update_window, text='请输入要修改该学生哪门课程号', font=('宋体', 14)).place(x=10, y=100)
+        Label(update_window, text='新课程成绩', font=('宋体', 14)).place(x=10, y=150)
+
+        var_sno = StringVar()
+        entry_sno = Entry(update_window, textvariable=var_sno, font=('宋体', 14))
+        entry_sno.place(x=300, y=50)
+
+        var_cno = StringVar()
+        entry_cno = Entry(update_window, textvariable=var_cno, font=('宋体', 14))
+        entry_cno.place(x=300, y=100)
+
+        var_grade = IntVar()
+        entry_grade = Entry(update_window, textvariable=var_grade, font=('宋体', 14))
+        entry_grade.place(x=300, y=150)
+
+        def updateSC():
+            sno = entry_sno.get()
+            cno = entry_cno.get()
+            grade = entry_grade.get()
+            if sno != '' and cno != '' and grade != '':
+                r = scd.updSCGrade(SC(sno=sno, cno=cno, grade=grade))
+                if r == "修改失败":
+                    tkinter.messagebox.showerror(r, "课程名称修改失败")
+                entry_sno.delete(0, END)
+                entry_cno.delete(0, END)
+                entry_grade.delete(0, END)
+                tkinter.messagebox.showinfo("操作成功", "该学生课程信息修改成功")
+            else:
+                tkinter.messagebox.showerror("操作失败", "修改条目的学号和课程号都不能为空")
+
+        btn_insert = Button(update_window, text='修改', command=updateSC)
+        btn_quit = Button(update_window, text='退出', command=update_window.destroy)
+        btn_insert.place(x=220, y=200)
+        btn_quit.place(x=320, y=200)
+
+
 student_table_op = StudentTableOperation()
 course_table_op = CourseTableOperation()
+sc_table_op = SCTableOperation()
 
 
 def chooseStudentOp():
@@ -734,6 +1252,25 @@ def chooseCourseOp():
     # choose_op_window.geometry('750x400')
 
 
+def chooseSCOp():
+    choose_table_window.destroy()
+    global choose_op_window
+    choose_op_window = Tk()
+    choose_op_window.title('操作选项')
+    width = 72
+    height = 1
+    Button(choose_op_window, text='增加', width=width, height=height,
+           command=sc_table_op.insertWindow, bg='light yellow', font='楷体').grid(row=0, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='删除', width=width, height=height,
+           command=sc_table_op.deleteWindow, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='查找', width=width, height=height,
+           command=sc_table_op.selectWindow, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='修改', width=width, height=height,
+           command=sc_table_op.updateWindow, bg='light yellow', font='楷体').grid(row=30, column=1, padx=10, pady=20)
+    Button(choose_op_window, text='返回', width=width, height=height,
+           command=chooseTable, bg='light cyan', font='楷体').grid(row=40, column=1, padx=10, pady=20)
+
+
 def textCommand():
     print("ok")
 
@@ -755,7 +1292,7 @@ def chooseTable():
     Button(choose_table_window, text='学生信息表', width=width, height=height,
            command=chooseStudentOp, bg='light yellow', font='楷体').grid(row=0, column=1, padx=10, pady=20)
     Button(choose_table_window, text='学生选课成绩表', width=width, height=height,
-           command=chooseStudentOp, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
+           command=chooseSCOp, bg='light yellow', font='楷体').grid(row=10, column=1, padx=10, pady=20)
     Button(choose_table_window, text='课程信息表', width=width, height=height,
            command=chooseCourseOp, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
 
