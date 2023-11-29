@@ -999,6 +999,7 @@ class SCTableOperation:
                 for i in range(0, len(val)):
                     table.insert('', END, values=(val[i][0], sname, val[i][1], cname_tuple[i], val[i][2], val[i][3]))
                 entry_sno.delete(0, END)
+                return avg_grade
 
             table = Treeview(info_window, columns=('sno', 'sname', 'cno', 'cname', 'grade', 'ccredit'), show="headings")
             table.column('sno', width=100)
@@ -1015,7 +1016,9 @@ class SCTableOperation:
             table.heading('ccredit', text='学分')
             table.place(width=800, height=300)
 
-            loadSC()
+            avg_grade = loadSC()
+            Label(info_window, text='该学生平均成绩：', font=('宋体', 12)).place(x=0, y=340)
+            Label(info_window, text=avg_grade, font=('宋体', 12)).place(x=120, y=340)
             btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
             btn_quit.place(x=360, y=400)
             info_window.mainloop()
@@ -1040,6 +1043,7 @@ class SCTableOperation:
                 for i in range(0, len(val)):
                     table.insert('', END, values=(val[i][0], sname_tuple[i], val[i][1], cname, val[i][2], val[i][3]))
                 entry_cno.delete(0, END)
+                return avg_grade
 
             table = Treeview(info_window, columns=('sno', 'sname', 'cno', 'cname', 'grade', 'ccredit'), show="headings")
             table.column('sno', width=100)
@@ -1056,7 +1060,9 @@ class SCTableOperation:
             table.heading('ccredit', text='学分')
             table.place(width=800, height=300)
 
-            loadSC()
+            avg_grade = loadSC()
+            Label(info_window, text='该课程平均成绩：', font=('宋体', 12)).place(x=0, y=340)
+            Label(info_window, text=avg_grade, font=('宋体', 12)).place(x=120, y=340)
             btn_quit = Button(info_window, text='退出', width=10, height=2, command=info_window.destroy)
             btn_quit.place(x=360, y=400)
             info_window.mainloop()
