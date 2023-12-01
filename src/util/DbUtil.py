@@ -6,16 +6,21 @@ class DbUtil:
     connect: object
     cursor: object
 
-    # def __init__(self, student, username, password):
-    #     self.connect = pymysql.Connect(host='localhost', port = 3306, database='studentxj',
-    #                                    user=username, passwd=password, charset='utf8')
-    #     self.cursor = self.connect.cursor()
+    def __init__(self, username='admin', password='123456'):
+        self.connect = pymysql.Connect(host='localhost', port=3306, database='studentxj',
+                                       user=username, passwd=password, charset='utf8')
+        self.cursor = self.connect.cursor()
 
     # 测试
-    def __init__(self):
-        self.connect = pymysql.Connect(host='localhost', port=3306, database='studentxj',
-                                       user='root', passwd='assassin030527', charset='utf8')
-        self.cursor = self.connect.cursor()
+    # def __init__(self):
+    #     self.connect = pymysql.Connect(host='localhost', port=3306, database='studentxj',
+    #                                    user='root', passwd='assassin030527', charset='utf8')
+    #     self.cursor = self.connect.cursor()
+
+    # def __init__(self):
+    #     self.connect = pymysql.Connect(host='localhost', port=3306, database='studentxj',
+    #                                    user='admin', passwd='123456', charset='utf8')
+    #     self.cursor = self.connect.cursor()
 
     def close(self):
         self.connect.close()

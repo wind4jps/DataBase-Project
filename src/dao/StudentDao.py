@@ -1,6 +1,13 @@
 from util.DbUtil import DbUtil
 from po.student import *
 
+
+class checkDao:
+    checku: DbUtil
+
+    def __init__(self, username, password):
+        self.checku = DbUtil(username=username, password=password)
+
 class StudentDao:
     su: DbUtil
 

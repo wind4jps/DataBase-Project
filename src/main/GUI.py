@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter.ttk import Treeview
 from dao.StudentDao import *
-from tkinter.simpledialog import *
 import tkinter.messagebox
 from po.student import *
 
@@ -1277,12 +1276,21 @@ def chooseSCOp():
            command=chooseTable, bg='light cyan', font='楷体').grid(row=40, column=1, padx=10, pady=20)
 
 
-def textCommand():
-    print("ok")
+def checkUser():
+    usr_name = var_usr_name.get()
+    usr_pwd = var_usr_pwd.get()
+    try:
+        ckd = checkDao(username=usr_name, password=usr_pwd)
+        return True
+    except Exception as e:
+        tkinter.messagebox.showerror("登录失败", "请检查账号密码是否正确")
+        return False
 
 
 def chooseTable():
-    # print(var_user_name.get())
+    user_flag = checkUser()
+    if not user_flag:
+        return
     global flag
     if flag == 1:
         logInWindow.destroy()
@@ -1302,6 +1310,8 @@ def chooseTable():
     Button(choose_table_window, text='课程信息表', width=width, height=height,
            command=chooseCourseOp, bg='light yellow', font='楷体').grid(row=20, column=1, padx=10, pady=20)
 
+global usr_name
+global usr_pwd
 
 flag = 1
 logInWindow = Tk()
@@ -1310,8 +1320,8 @@ logInWindow.geometry('400x300')
 Label(logInWindow, text='UserID', font=('Arial', 14)).place(x=10, y=150)
 Label(logInWindow, text='Password', font=('Arial', 14)).place(x=10, y=190)
 
-var_user_name = StringVar()
-entry_usr_name = Entry(logInWindow, textvariable=var_user_name, font=('Arial', 14))
+var_usr_name = StringVar()
+entry_usr_name = Entry(logInWindow, textvariable=var_usr_name, font=('Arial', 14))
 entry_usr_name.place(x=120, y=155)
 
 var_usr_pwd = StringVar()
