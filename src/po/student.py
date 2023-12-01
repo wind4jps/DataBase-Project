@@ -26,9 +26,9 @@ class Course:
     cno: str
     cname: str
     tno: str
-    ccredit: int
+    ccredit: float
 
-    def __init__(self, cno: str = None, cname: str = None, tno: str = None, ccredit: int = None):
+    def __init__(self, cno: str = None, cname: str = None, tno: str = None, ccredit: float = None):
         self.cno = cno
         self.cname = cname
         self.tno = tno
@@ -41,9 +41,9 @@ class SC:
     sno: str
     cno: str
     grade: int
-    ccredit: int
+    ccredit: float
 
-    def __init__(self, sno: str = None, cno: str = None, grade: int = None, ccredit: int = None):
+    def __init__(self, sno: str = None, cno: str = None, grade: int = None, ccredit: float = None):
         self.sno = sno
         self.cno = cno
         self.grade = grade

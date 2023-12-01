@@ -521,7 +521,7 @@ class CourseTableOperation:
         entry_tno = Entry(insert_window, textvariable=var_tno, font=('宋体', 14))
         entry_tno.place(x=150, y=150)
 
-        var_ccredit = IntVar()
+        var_ccredit = DoubleVar()
         entry_ccredit = Entry(insert_window, textvariable=var_ccredit, font=('宋体', 14))
         entry_ccredit.place(x=150, y=200)
 
@@ -785,7 +785,7 @@ class CourseTableOperation:
         btn_select_tno = Button(select_window, text='查询', command=selectCourseByTno)
         btn_select_tno.place(x=490, y=195)
 
-        var_ccredit = IntVar()
+        var_ccredit = DoubleVar()
         entry_ccredit = Entry(select_window, textvariable=var_ccredit, font=('宋体', 14))
         entry_ccredit.place(x=270, y=275)
         btn_select_ccredit = Button(select_window, text='查询', command=selectCourseByCredit)
@@ -816,7 +816,7 @@ class CourseTableOperation:
         entry_tno = Entry(update_window, textvariable=var_tno, font=('宋体', 14))
         entry_tno.place(x=250, y=150)
 
-        var_ccredit = IntVar()
+        var_ccredit = DoubleVar()
         entry_ccredit = Entry(update_window, textvariable=var_ccredit, font=('宋体', 14))
         entry_ccredit.place(x=250, y=200)
 
