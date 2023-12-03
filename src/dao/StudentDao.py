@@ -81,7 +81,7 @@ class StudentDao:
     def updStudentName(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('update student set sname = "%s" where sno = %s', (s.sname, s.sno))
+            self.su.execute('update student set sname = %s where sno = %s', (s.sname, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -108,7 +108,7 @@ class StudentDao:
     def updStudentMajor(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('update student set smajor = "%s" where sno = %s', (s.smajor, s.sno))
+            self.su.execute('update student set smajor = %s where sno = %s', (s.smajor, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
@@ -117,7 +117,7 @@ class StudentDao:
     def updStudentDept(self, s: Student):
         try:
             assert isinstance(self.su, DbUtil)
-            self.su.execute('update student set sdept = "%s" where sno = %s', (s.sdept, s.sno))
+            self.su.execute('update student set sdept = %s where sno = %s', (s.sdept, s.sno))
             return "操作成功"
         except Exception as e:
             print(e)
