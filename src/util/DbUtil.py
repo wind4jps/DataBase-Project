@@ -7,7 +7,7 @@ class DbUtil:
     cursor: object
 
     def __init__(self, username='admin', password='123456'):
-        self.connect = pymysql.Connect(host='192.168.1.106', port=3306, database='studentxj',
+        self.connect = pymysql.Connect(host='localhost', port=3306, database='studentxj',
                                        user=username, passwd=password, charset='utf8')
         self.cursor = self.connect.cursor()
 
